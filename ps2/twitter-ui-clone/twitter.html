@@ -7,22 +7,31 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
-        .section-header {
-            padding:10px;
+        .featured {
+            text-align:center;
+            padding-top:30px;
+            padding-bottom:30px;
             font-size:20px;
         }
+
+        .subtitle {
+            font-size:20px;
+            padding:15px;
+        }
+
+        .section-header {
+            padding-bottom:30px;
+        }
+
         .title {
             text-align:center;
             background-color:lightblue;
-            font-size:20px; 
-            padding:10px;
         }
 
         .nav-bar {
             display:flex;
             background-color: lightgray;
-            padding:15px;
+            padding:10px;
             font-size:10px;
         }
 
@@ -37,7 +46,7 @@
 <body>
     <div class="container">
         <!-- Title block -->
-        <div class="title">What's happening?</div>
+        <div class="title subtitle">What's happening?</div>
 
         <!-- Top level navigation bar -->
         <div class="nav-bar">
@@ -50,9 +59,86 @@
                 <button class="nav-bar-item">Contact</button>
             </div>
         </div>
+
         <!-- Section Header -->
-        <div class="section-header">
+        <div class="subtitle">
             Section header
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                title1
+                <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="Columbia University">
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                title2
+                <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="Columbia University">
+            </div>
+            <div class="col-md-3">
+                title3
+                <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="Columbia University">
+            </div>
+            <div class="col-md-3">
+                title4
+                <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="Columbia University">
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="featured">Featured</span>    
+                <div class="col-md-4">
+                    title5
+                    <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                </div>
+                <div class="col-md-4">
+                    title6
+                    <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                </div>
+                <div class="col-md-4">
+                    title7
+                    <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                </div>
+                <div class="col-md-4">
+                    Grid within Grid
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                        <div class="col-md-4">
+                            <img class="img-fluid" src="http://coms4170.cs.columbia.edu/2020-spring/hw/hw2/columbia.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            
+        
         </div>
     </div>
 
