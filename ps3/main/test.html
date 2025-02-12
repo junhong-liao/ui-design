@@ -13,12 +13,15 @@
     crossorigin="anonymous"></script>
 
     <style>
-        /* centering is not working */
+        /* Centering the content */
         body {
-            display:flex;
-            flex-direction:column;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Nunito', Arial, sans-serif;
         }
 
         .modern {
@@ -26,22 +29,24 @@
         }
 
         .mini-spacing {
-            padding-bottom:10px;
+            padding-bottom: 10px;
         }
 
         .spacing {
-            padding-bottom:20px;
-        }
-
-        .tweet {
-            border: 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            width: 50%;
+            padding-bottom: 20px;
         }
 
         .inline {
-            display:inline-block;
+            display: inline-block;
+        }
+
+        .tweet {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            width: 300px;
         }
     </style>
 
@@ -49,46 +54,53 @@
         $(document).ready(function() {
             let max_characters = 20;
             let excess = 0;
+
+            // Character count logic
             $("#tweetbox").on("input", function() {
                 let length = $(this).val().length;
                 if (length > max_characters) {
-                    excess = max_characters - length;
-                    $("#tweet_length").text(excess);
+                    excess = length - max_characters;
+                    $("#tweet_length").text("-" + excess);
                     $("#tweet_length").css("color", "red");
                     $("#tweet_length").css("font-weight", "bold");
                     $("#post").prop("disabled", true);
                 } else {
-                    $("#tweet_length").text(20 - length);
+                    $("#tweet_length").text(length);
                     $("#tweet_length").css("color", "lightgray");
                     $("#tweet_length").css("font-weight", "normal");
                     $("#post").prop("disabled", false);
                 }
-            })
+            });
 
+            // Post tweet logic
             $("#tweet").click(function() {
-                // trim used to eliminate trailing whitespace
-                let user_name = "jun";
-                let tweet_text = $("#tweetbox").val().trim();
-                if (tweet_text.length > 0 && tweet_text.length <= max_characters) {
-                // create new tweet element
-                    let tweet = $(`
+                let tweetText = $("#tweetbox").val().trim();
+
+                // Check if the tweet is valid
+                if (tweetText.length > 0 && tweetText.length <= max_characters) {
+                    // Create a new tweet element
+                    const newTweet = $(`
                         <div class="tweet modern">
-                            <p>${user_name}: ${tweet_text}</p>
+                            <p>${tweetText}</p>
                         </div>
                     `);
-                    $("body").append(tweet);
+
+                    // Append the new tweet to the posts section
+                    $("body").append(newTweet);
+
+                    // Clear the tweet box
                     $("#tweetbox").val("");
-                    $("#tweet_length").text("20");
+                    $("#tweet_length").text("0");
                     $("#tweet_length").css("color", "lightgray");
                     $("#tweet_length").css("font-weight", "normal");
-
                 } else {
-                    alert("Invalid Tweet");
+                    alert("Tweet is either empty or exceeds the character limit!");
                 }
-            })
-        })
+            });
+        });
     </script>
 </head>
+
 <body>
     <div>
         <span class="modern">Write a tweet</span>
@@ -97,12 +109,11 @@
         <br>
         <div class="mini-spacing"></div>
 
-        <!-- inline style for convenience -->
-        <div class="modern inline" id="tweet_length" style="color:lightgray; padding-right:5px">20</div>
+        <!-- Character count and post button -->
+        <div class="modern inline" id="tweet_length" style="color:lightgray; padding-right:5px">0</div>
         <button id="tweet">Post Tweet</button>
     </div>
     <div class="spacing"></div>
     <span class="modern">POSTS</span>
-    
 </body>
 </html>
