@@ -28,8 +28,11 @@
                 }
             }
         });
-      
+
       $( "#droppable" ).droppable({
+            over: function( event, ui ) {
+              $( this ).addClass( "ui-state-highlight" );
+            },
             drop: function( event, ui ) {
                 ui.helper.data("dropped", true);
                 $( this )
@@ -39,6 +42,7 @@
             },
             out: function ( event,  ui ) {
                 ui.helper.data("dropped", false);
+                $(this).removeClass("ui-state-highlight").find("p").html("Drop here");
             }
        });
     });
