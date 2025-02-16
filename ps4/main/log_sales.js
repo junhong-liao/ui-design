@@ -12,7 +12,6 @@ let clients = [
     "Taco Bell",
 ];
 
-
 $(document).ready( function() {
     // autocomplete loading
     $("#clientInput").autocomplete({

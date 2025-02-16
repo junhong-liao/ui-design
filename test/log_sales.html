@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Columbia Paper Infinity</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+    <!-- jQuery UI JS -->
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+    <!-- Google Fonts API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
+    <!-- Custom JS -->
+    <script src="./log_sales.js"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        .logo {
+            width: 110px;
+            height: 110px;
+        }
+
+        .header {
+            text-align: left;
+            color: white;
+            width: 100%;
+            background-color: #385988;
+            font-size: 40px;
+            padding-top: 40px;
+            padding-left: 20px;
+            padding-bottom: 15px;
+            font-family: "Cinzel", serif;
+        }
+        
+        .sale-row:hover {
+            background-color: lightyellow;
+            cursor: move;
+        }
+
+        .error-msg {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            color: red;
+        }
+
+        #trash {
+            border: 2px dashed #ccc;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .margin-v {
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-12 header d-inline-block">
+                <img class="logo" src="./columbia_logo.png" alt="Columbia University Logo">
+                <span class="space-sm">Columbia Paper Infinity</span>
+            </div>
+            <div id="trash" class="delete modern">
+                Drag here to delete
+            </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="row margin-v">
+            <div class="col-3">Sales Representative</div>
+            <input id="clientInput" class="col-4 mx-2" type="text" placeholder="Client">
+            <input id="reamsInput" class="col-2 mx-2" type="number" placeholder="# Reams">
+            <button id="submit" class="col-2 mx-2">Submit</button>
+        </div>
+
+        <!-- Sales List -->
+        <div id="salesList" class="container"></div>
+    </div>
+
+
+</body>
+</html>
