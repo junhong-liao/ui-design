@@ -24,8 +24,6 @@
 
     <!-- Custom JS -->
     <script src="./log_sales.js"></script>
-
-    <!-- Custom CSS -->
     <style>
         .logo {
             width: 110px;
@@ -69,7 +67,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="row">
             <div class="col-12 header d-inline-block">
                 <img class="logo" src="./columbia_logo.png" alt="Columbia University Logo">
@@ -80,15 +77,22 @@
             </div>
         </div>
 
-        <!-- Input Form -->
         <div class="row margin-v">
-            <div class="col-3">Sales Representative</div>
-            <input id="clientInput" class="col-4 mx-2" type="text" placeholder="Client">
-            <input id="reamsInput" class="col-2 mx-2" type="number" placeholder="# Reams">
-            <button id="submit" class="col-2 mx-2">Submit</button>
+            <div class="col-3">
+                <input id="salespersonInput" type="text" placeholder="Salesperson">
+                <div class="error-msg"></div> 
+            </div>
+            <div class="col-4 mx-1">
+                <input id="clientInput" type="text" placeholder="Client">
+                <div class="error-msg"></div> 
+            </div>
+            <div class="col-2 mx-1">
+                <input id="reamsInput" type="number" placeholder="# Reams">
+                <div class="error-msg"></div>
+            </div>
+            <button id="submit" class="col-2">Submit</button>
         </div>
 
-        <!-- Sales List -->
         <div id="salesList" class="container"></div>
     </div>
 

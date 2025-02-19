@@ -1,4 +1,4 @@
-// Model: Data
+// model
 let clients = [
     "Shake Shack",
     "Toast",
@@ -13,13 +13,14 @@ let clients = [
     "Taco Bell",
 ];
 
+// hardcode sales
 let sales = [
     { salesperson: "James D. Halpert", client: "Shake Shack", reams: 100 },
     { salesperson: "Stanley Hudson", client: "Toast", reams: 400 },
     { salesperson: "Michael O. Scott", client: "Computer Science Department", reams: 1000 },
 ];
 
-// View: Render Sales List
+// view: render sales
 function renderSales() {
     $("#salesList").empty();
     sales.forEach((sale, index) => {
@@ -34,14 +35,66 @@ function renderSales() {
         $("#salesList").append(entry);
     });
 
-    // Initialize draggable rows. Revert if invalid.
+    // initialize draggable rows, or revert if invalid.
     $(".sale-row").draggable({
         revert: "invalid",
         cursor: "move"
     });
 }
 
+// validate the form
+function validateForm() {
+    let isValid = true;
+    const salesperson = $("#salespersonInput").val().trim();
+    const client = $("#clientInput").val().trim();
+    const reams = $("#reamsInput").val();
+
+    // clear any old error messages
+    $(".error-msg").text("").hide();
+
+    if (!salesperson) {
+        $("#salespersonInput").next(".error-msg").text("Salesperson required").show();
+        isValid = false;
+    }
+
+    if (!client) {
+        $("#clientInput").next(".error-msg").text("Client required").show();
+        isValid = false;
+    }
+
+    if (!reams) {
+        $("#reamsInput").next(".error-msg").text("Reams required").show();
+        isValid = false;
+    } else if (isNaN(reams)) {
+        $("#reamsInput").next(".error-msg").text("Must be a number").show();
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// submit new entry
+function submitForm() {
+    if (!validateForm()) return;
+
+    // now update model
+    sales.unshift({
+        salesperson: $("#salespersonInput").val().trim(),
+        client: $("#clientInput").val().trim(),
+        reams: $("#reamsInput").val()
+    });
+
+    // render the sales
+    renderSales();
+
+    // reset form and set cursor
+    $("#salespersonInput").val("").focus();
+    $("#clientInput").val("");
+    $("#reamsInput").val("");
+}
+
 $(document).ready(function () {
+    // autocomplete
     $("#clientInput").autocomplete({
         source: function (request, response) {
             let matches = $.grep(clients, function (item) {
@@ -49,12 +102,13 @@ $(document).ready(function () {
             });
             response(matches);
         }
-        // add new entry to autocomplete
     }).on("autocompleteclose", function (event, ui) {
         if (ui.item) return;
         const newClient = $(this).val().trim();
         if (newClient && !clients.includes(newClient)) {
             clients.push(newClient);
+            // refresh if a new client was added
+            $("#clientInput").autocomplete("option", "source", clients);
         }
     });
 
@@ -67,14 +121,13 @@ $(document).ready(function () {
         if (e.which === 13) submitForm();
     });
 
-    // delete functionality
     $(document).on("click", ".delete-btn", function () {
         const index = $(this).closest(".sale-row").data("index");
         sales.splice(index, 1);
         renderSales();
     });
 
-    // delete drop area
+    // trash / delete area
     $("#trash").droppable({
         accept: ".sale-row",
         activeClass: "bg-warning",
@@ -85,46 +138,3 @@ $(document).ready(function () {
         }
     });
 });
-
-// Form Validation & Submission
-function validateForm() {
-    let isValid = true;
-    const client = $("#clientInput").val().trim();
-    const reams = $("#reamsInput").val();
-
-    // Clear previous errors
-    $(".error-msg").remove();
-
-    if (!client) {
-        $("#clientInput").after('<div class="error-msg">Client required</div>');
-        isValid = false;
-    }
-
-    if (!reams) {
-        $("#reamsInput").after('<div class="error-msg">Reams required</div>');
-        isValid = false;
-    } else if (isNaN(reams)) {
-        $("#reamsInput").after('<div class="error-msg">Must be a number</div>');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function submitForm() {
-    if (!validateForm()) return;
-
-    // Update Model
-    sales.unshift({
-        salesperson: "Bears beats BattlestarGalactica",
-        client: $("#clientInput").val().trim(),
-        reams: $("#reamsInput").val()
-    });
-
-    // Update View
-    renderSales();
-
-    // Clear Form
-    $("#clientInput").val("").focus();
-    $("#reamsInput").val("");
-}
