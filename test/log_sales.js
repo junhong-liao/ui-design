@@ -35,7 +35,7 @@ function renderSales() {
         $("#salesList").append(entry);
     });
 
-    // initialize draggable rows, or revert if invalid.
+    // initialize draggable rows. revert if invalid drop location.
     $(".sale-row").draggable({
         revert: "invalid",
         cursor: "move"
@@ -107,6 +107,7 @@ $(document).ready(function () {
         const newClient = $(this).val().trim();
         if (newClient && !clients.includes(newClient)) {
             clients.push(newClient);
+            console.log(newClient);
             // refresh if a new client was added
             $("#clientInput").autocomplete("option", "source", clients);
         }
