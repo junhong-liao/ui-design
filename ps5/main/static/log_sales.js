@@ -44,7 +44,7 @@ function addSales() {
     let reamsSold = $("#reamsInput").val().trim();
 
     if (!client || !reamsSold || !salesPerson) {
-
+        // console.log("missing parameter...");
     }
 
     let saleData = {
@@ -58,34 +58,51 @@ function addSales() {
         url: "/add_sale",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(saleData),
-        success: function (result) {
+        success: function(result) {
             displaySales(result.data);
+            // reset input boxes
             $("#salesPersonInput").val("")
             $("#clientInput").val("")
             $("#reamsInput").val("")
             $("#salesPersonInput").focus()
+        },
+        error: function(request, status, error) {
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
         }
-
-
-
-
-
     })
-
 }
 
+function deleteSale(saleID) {
+    $.ajax({
+        type: "POST",
+        url: "/delete_sale",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({id: saleID}),
+        success: function(result) {
+            displaySales(result.data);
+        },
+        error: function(request, status, error) {
+            console.log("Error");
+            console.log(request)
+            console.log(status)
+            console.log(error)
+        }
+    })
+}
 
 $(document).ready(function(){
     //when the page loads, display all the names
-    displaySales(sales)                        
-
+    getSales();                        
     $("#submit_sale").click(function(){                
-        get_and_save_sale()
+        addSales();
     })
 
     $("#submit_sale").keypress(function(e){     
         if(e.which == 13) {
-            get_and_save_sale()
+            addSales();
         }   
     })
 })

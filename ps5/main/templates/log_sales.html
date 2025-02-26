@@ -5,7 +5,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'log_sales.js') }}"></script>
     
     <script>
-        let sales = {{sales|tojson}} 
+        let data = {{data|tojson}} 
         console.log(data)
     </script>
     
@@ -19,8 +19,8 @@
     <div id="sale_container">
     </div>
 
-<div id="trash" class="delete modern">
-    Delete
-</div>
+    <div id="trash">
+        Drag here to delete
+    </div>
 
 {% endblock %}

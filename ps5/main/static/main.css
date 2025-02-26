@@ -32,12 +32,9 @@
     padding-top: 10px;
 }
 
-.delete {
-    background-color: lightgray;
-    color: #385988;
-    margin-top: 20px;
-    padding: 10px;
-    font-size: 20px;
-    font-family: 'Nunito', Arial, sans-serif;
-    border-radius: 10px;
+#trash {
+    border: 2px dashed #ccc;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
 }
