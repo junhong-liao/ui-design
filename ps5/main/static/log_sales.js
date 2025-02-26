@@ -1,18 +1,17 @@
 function displaySales(sales) {
-    $("#salesContainer").empty();
-    // is including the i parameter necessary? where does it come from?
+    $("#sales_container").empty();
     $.each(sales, function (i, sale) {
         let saleEntry = $(`
             <div class="container">
                 <div class="row margin-v">
-                    <div class="col-3">${sale.salesperson}</div>
-                    <div class="col-4 mx-2">${sale.client}</div>
-                    <div class="col-2 mx-2">${sale.reams}</div>
-                    <button class="delete-btn" data-id="${sale.id}">X</button>
+                    <div class="col-3 error-msg">${sale.salesperson}</div>
+                    <div class="col-4 error-msg">${sale.client}</div>
+                    <div class="col-2 error-msg">${sale.reams}</div>
+                    <button class="col-3 delete-btn" data-id="${sale.id}">X</button>
                 </div>
             </div>
         `);
-        $("#salesContainer").append(saleEntry);
+        $("#sales_container").append(saleEntry);
     });
 
     // event listener to trigger sale deletion
@@ -38,14 +37,43 @@ function getSales() {
     })
 }
 
+// validate the form
+function validateForm() {
+    let isValid = true;
+    const salesperson = $("#salespersonInput").val().trim();
+    const client = $("#clientInput").val().trim();
+    const reams = $("#reamsInput").val();
+
+    // clear any old error messages
+    $(".error-msg").text("").hide();
+
+    if (!salesperson) {
+        $("#salespersonInput").next(".error-msg").text("Salesperson required").show();
+        isValid = false;
+    }
+
+    if (!client) {
+        $("#clientInput").next(".error-msg").text("Client required").show();
+        isValid = false;
+    }
+
+    if (!reams) {
+        $("#reamsInput").next(".error-msg").text("Reams required").show();
+        isValid = false;
+    } else if (isNaN(reams)) {
+        $("#reamsInput").next(".error-msg").text("Must be a number").show();
+        isValid = false;
+    }
+
+    return isValid;
+}
+
 function addSales() {
+    if (!validateForm()) return;
+
     let salesPerson = $("#salesPersonInput").val().trim();
     let client = $("#clientInput").val().trim();
     let reamsSold = $("#reamsInput").val().trim();
-
-    if (!client || !reamsSold || !salesPerson) {
-        // console.log("missing parameter...");
-    }
 
     let saleData = {
         salesPerson: salesPerson,
@@ -77,7 +105,7 @@ function addSales() {
 
 function deleteSale(saleID) {
     $.ajax({
-        type: "POST",
+        type: "DELETE",
         url: "/delete_sale",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({id: saleID}),

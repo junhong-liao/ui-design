@@ -43,13 +43,16 @@ clients = [
 def welcome():
    return render_template('welcome.html')   
 
+
 @app.route('/infinity')
 def log_sales():
    return render_template('log_sales.html', data=sales)   
 
+
 @app.route('/get_sales', methods=['GET'])
 def get_sales():
    return jsonify(data=sales)
+
 
 @app.route('/add_sale', methods=['POST'])
 def add_sale():
@@ -77,6 +80,7 @@ def delete_sale():
     saleID = data.get("id")
     sales = [sale for sale in sales if sale["id"] != saleID]
     return jsonify(data=sales)
+
 
 if __name__ == '__main__':
    app.run(debug = True, port=5001)
