@@ -42,24 +42,30 @@ function displayNames(data){
     $("#people_container").empty()
 
     //insert all new data
-    $.each(data, function(i, datum){
-        let new_name= $("<div>"+datum["name"]+"</div>")
-        $("#people_container").append(new_name)
+    $.each(sales, function(i, datum){
+        let new_sale= $("<div>"+datum["name"]+"</div>")
+        $("#people_container").append(new_sale)
     })
 }
 
-function get_and_save_name(){
-    let name = $("#new_name").val()
-    let data_to_save = {"name": name}         
+function get_and_save_sale(){
+    let salesperson = $("#salesperson").val()
+    let client = $("#client").val()
+    let reams = $("#reams").val()
+    let data_to_save = {
+        "salesperson": salesperson,
+        "client": client,
+        "reams": reams
+    }         
     $.ajax({
         type: "POST",
-        url: "add_name",                
+        url: "add_sale",                
         dataType : "json",
         contentType: "application/json; charset=utf-8",
         data : JSON.stringify(data_to_save),
         success: function(result){
             let all_data = result["data"]
-            console.log("success get_and_save_name")
+            console.log("success: get_and_save_sale")
             console.log(all_data)
             data = all_data
             displayNames(data)
@@ -76,17 +82,15 @@ function get_and_save_name(){
 
 $(document).ready(function(){
     //when the page loads, display all the names
-    displayNames(data)                        
+    displayNames(sales)                        
 
     $("#submit_name").click(function(){                
         get_and_save_name()
     })
 
-    
     $("#new_name").keypress(function(e){     
         if(e.which == 13) {
             get_and_save_name()
         }   
     })
-
 })

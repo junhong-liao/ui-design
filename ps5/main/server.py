@@ -3,26 +3,42 @@ from flask import render_template
 from flask import Response, request, jsonify
 app = Flask(__name__)
 
-
-
-current_id = 0
-clients = ["columbia university"]
-
+current_id = 4
 sales = [
     {
-        "salesperson": "michael scott", 
-        "client": "columbia university",
-        "reams": 100
+    "id": 1,
+    "salesperson": "James D. Halpert",
+    "client": "Shake Shack",
+    "reams": 1000
     },
     {
-        "salesperson": "michael scott", 
-        "client": "columbia university",
-        "reams": 100
-    }
+    "id": 2,
+    "salesperson": "Stanley Hudson",
+    "client": "Toast",
+    "reams": 4000
+    },
+    {
+    "id": 3,
+    "salesperson": "Michael G. Scott",
+    "client": "Computer Science Department",
+    "reams": 10000
+    },
 ]
+clients = [
+    "Shake Shack",
+    "Toast",
+    "Computer Science Department",
+    "Teacher's College",
+    "Starbucks",
+    "Subsconsious",
+    "Flat Top",
+    "Joe's Coffee",
+    "Max Caffe",
+    "Nussbaum & Wu",
+    "Taco Bell",
+];
 
 # ROUTES
-
 @app.route('/')
 def welcome():
    return render_template('welcome.html')   
@@ -31,38 +47,31 @@ def welcome():
 def log_sales():
    return render_template('log_sales.html')   
 
-@app.route('/hello/<name>')
-def hello_name(name=None):
-    return render_template('hello_name.html', name=name) 
-
-@app.route('/people')
-def people():
-    return render_template('people.html', data=sales)  
-
-
 # AJAX FUNCTIONS
-
-# ajax for people.js
-@app.route('/add_name', methods=['GET', 'POST'])
-def add_name():
-    global data 
+# ajax for log_sales.js
+@app.route('/add_sale', methods=['GET', 'POST'])
+def add_sale():
+    global sales 
     global current_id 
 
     json_data = request.get_json()   
     name = json_data["name"] 
+    client = json_data["client"] 
+    reams = json_data["reams"] 
     
-    # add new entry to array with 
-    # a new id and the name the user sent in JSON
+    # add new entry to array w id and name the user sent in JSON
     current_id += 1
     new_id = current_id 
-    new_name_entry = {
-        "name": name,
-        "id":  current_id
+    new_entry = {
+        "id": new_id,
+        "salesperson": name,
+        "client": client,
+        "reams": reams
     }
-    data.append(new_name_entry)
+    sales.append(new_entry)
 
     #send back the WHOLE array of data, so the client can redisplay it
-    return jsonify(data = data)
+    return jsonify(data = sales)
  
 if __name__ == '__main__':
    app.run(debug = True, port=5001)

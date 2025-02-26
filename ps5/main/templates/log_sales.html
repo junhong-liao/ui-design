@@ -5,18 +5,18 @@
 <script type="text/javascript" src="{{ url_for('static', filename = 'log_sales.js') }}"></script>
     
     <script>
-        let data = {{data|tojson}} 
+        let sales = {{sales|tojson}} 
         console.log(data)
     </script>
 
     <div id="hello_div"> Hello people! </div>
     
-    <div id="name_entry_container">
-        name: <input id="new_name"></input>  
-        <button id="submit_name">Submit</button>
+    <div id="sale_entry_container">
+        name: <input id="new_sale"></input>  
+        <button id="submit_sale">Submit</button>
     </div>
 
-    <div id="people_container">
+    <div id="sale_container">
     </div>
 
 <div id="trash" class="delete modern">
