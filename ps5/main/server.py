@@ -46,32 +46,6 @@ def welcome():
 @app.route('/infinity')
 def log_sales():
    return render_template('log_sales.html')   
-
-# AJAX FUNCTIONS
-# ajax for log_sales.js
-@app.route('/add_sale', methods=['GET', 'POST'])
-def add_sale():
-    global sales 
-    global current_id 
-
-    json_data = request.get_json()   
-    name = json_data["name"] 
-    client = json_data["client"] 
-    reams = json_data["reams"] 
-    
-    # add new entry to array w id and name the user sent in JSON
-    current_id += 1
-    new_id = current_id 
-    new_entry = {
-        "id": new_id,
-        "salesperson": name,
-        "client": client,
-        "reams": reams
-    }
-    sales.append(new_entry)
-
-    #send back the WHOLE array of data, so the client can redisplay it
-    return jsonify(data = sales)
  
 if __name__ == '__main__':
    app.run(debug = True, port=5001)
