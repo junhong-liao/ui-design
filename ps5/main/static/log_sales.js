@@ -61,7 +61,7 @@ function getClients() {
 }
 
 function addSales() {
-    // if (!validateForm()) return;
+    if (!validateForm()) return;
 
     let salesPerson = $("#salesPersonInput").val().trim();
     let client = $("#clientInput").val().trim();
@@ -112,6 +112,42 @@ function deleteSale(saleID) {
             console.log(error)
         }
     })
+}
+
+function validateForm() {
+    let isValid = true;
+
+    const salesPerson = $("#salesPersonInput").val().trim();
+    if (salesPerson === "") {
+        $("#salesPersonError").show();
+        isValid = false;
+    } else {
+        $("#salesPersonError").hide();
+    }
+
+    const client = $("#clientInput").val().trim();
+    if (client === "") {
+        $("#clientError").show();
+        isValid = false;
+    } else {
+        $("#clientError").hide();
+    }
+
+    const reamsSold = $("#reamsInput").val().trim();
+    if (reamsSold === "" || isNaN(reamsSold) || parseInt(reamsSold) <= 0) {
+        $("#reamsError").show();
+        isValid = false;
+    } else {
+        $("#reamsError").hide();
+    }
+
+    if (isValid) {
+        $("#submit_sale").prop("disabled", false);
+    } else {
+        $("#submit_sale").prop("disabled", true);
+    }
+
+    return isValid;
 }
 
 $(document).ready(function(){
