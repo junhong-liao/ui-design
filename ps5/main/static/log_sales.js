@@ -3,7 +3,7 @@ function displaySales(sales) {
     $.each(sales, function (i, sale) {
         let saleEntry = $(`
             <div class="container">
-                <div class="row margin-v">
+                <div class="row margin-v sale-entry">
                     <div class="col-3 error-msg">${sale.salesperson}</div>
                     <div class="col-4 error-msg">${sale.client}</div>
                     <div class="col-2 error-msg">${sale.reams}</div>
@@ -18,6 +18,11 @@ function displaySales(sales) {
     $(".delete-btn").click(function () {
         let saleId = $(this).data("id");
         deleteSale(saleId);
+    });
+
+    $(".sale-entry").draggable({
+        revert: "invalid",
+        cursor: "move"
     });
 }
 
@@ -37,39 +42,8 @@ function getSales() {
     })
 }
 
-// validate the form
-function validateForm() {
-    let isValid = true;
-    const salesperson = $("#salespersonInput").val().trim();
-    const client = $("#clientInput").val().trim();
-    const reams = $("#reamsInput").val();
-
-    // clear any old error messages
-    $(".error-msg").text("").hide();
-
-    if (!salesperson) {
-        $("#salespersonInput").next(".error-msg").text("Salesperson required").show();
-        isValid = false;
-    }
-
-    if (!client) {
-        $("#clientInput").next(".error-msg").text("Client required").show();
-        isValid = false;
-    }
-
-    if (!reams) {
-        $("#reamsInput").next(".error-msg").text("Reams required").show();
-        isValid = false;
-    } else if (isNaN(reams)) {
-        $("#reamsInput").next(".error-msg").text("Must be a number").show();
-        isValid = false;
-    }
-
-    return isValid;
-}
-
 function addSales() {
-    if (!validateForm()) return;
+    // if (!validateForm()) return;
 
     let salesPerson = $("#salesPersonInput").val().trim();
     let client = $("#clientInput").val().trim();
@@ -133,4 +107,14 @@ $(document).ready(function(){
             addSales();
         }   
     })
+
+     // trash / delete area
+     $("#trash").droppable({
+        accept: ".sale-row",
+        activeClass: "bg-warning",
+        drop: function (event, ui) {
+            let saleId = ui.data("id");
+            deleteSale(saleID);
+        }
+    });
 })

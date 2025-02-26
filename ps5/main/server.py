@@ -78,7 +78,7 @@ def delete_sale():
     global sales
     data = request.get_json()
     saleID = data.get("id")
-    sales = [sale for sale in sales if sale["id"] != saleID]
+    sales[:] = [sale for sale in sales if sale["id"] != saleID]
     return jsonify(data=sales)
 
 

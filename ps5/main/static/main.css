@@ -10,6 +10,12 @@
     font-family: "Cinzel", serif;
 }
 
+.sale-entry {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
 .logo {
     width: 110px;
     height: 110px;
