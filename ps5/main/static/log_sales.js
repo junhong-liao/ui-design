@@ -154,6 +154,10 @@ $(document).ready(function(){
     //when the page loads, display all the names
     getClients();
     getSales();
+
+    $("#salesPersonInput, #clientInput, #reamsInput").on("input", function() {
+        validateForm();
+    });
     
     // ensure the click event is only bound once!
     $("#submit_sale").off('click').on('click', function(){                
