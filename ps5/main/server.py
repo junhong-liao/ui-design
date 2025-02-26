@@ -24,7 +24,7 @@ sales = [
     "reams": 10000
     },
 ]
-clients = [
+clients = set([
     "Shake Shack",
     "Toast",
     "Computer Science Department",
@@ -36,7 +36,7 @@ clients = [
     "Max Caffe",
     "Nussbaum & Wu",
     "Taco Bell",
-];
+])
 
 # ROUTES
 @app.route('/')
@@ -54,6 +54,11 @@ def get_sales():
    return jsonify(data=sales)
 
 
+@app.route('/get_clients', methods=['GET'])
+def get_clients():
+   return jsonify(data=list(clients))
+
+
 @app.route('/add_sale', methods=['POST'])
 def add_sale():
     global current_id
@@ -69,6 +74,10 @@ def add_sale():
         "reams": reamsSold
     }
     sales.append(new_sale)
+
+    if client not in clients:
+       clients.add(client)
+
     current_id += 1
     return jsonify(data=sales)
 

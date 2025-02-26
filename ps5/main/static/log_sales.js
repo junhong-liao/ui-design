@@ -42,6 +42,24 @@ function getSales() {
     })
 }
 
+function getClients() {
+    $.ajax({
+        type: "GET",
+        url: "/get_clients",
+        success: function(result) {
+            $("#clientInput").autocomplete({
+                source: result.data
+            });
+        },
+        error: function(request, status, error){
+            console.log("Error fetching clients:");
+            console.log(request);
+            console.log(status);
+            console.log(error);
+        }
+    })
+}
+
 function addSales() {
     // if (!validateForm()) return;
 
@@ -97,7 +115,8 @@ function deleteSale(saleID) {
 
 $(document).ready(function(){
     //when the page loads, display all the names
-    getSales();                        
+    getClients();
+    getSales();
     
     // ensure the click event is only bound once!
     $("#submit_sale").off('click').on('click', function(){                
