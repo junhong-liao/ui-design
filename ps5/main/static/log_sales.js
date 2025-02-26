@@ -80,11 +80,12 @@ function addSales() {
         data: JSON.stringify(saleData),
         success: function(result) {
             displaySales(result.data);
+            getClients();
             // reset input boxes
-            $("#salesPersonInput").val("")
-            $("#clientInput").val("")
-            $("#reamsInput").val("")
-            $("#salesPersonInput").focus()
+            $("#salesPersonInput").val("");
+            $("#clientInput").val("");
+            $("#reamsInput").val("");
+            $("#salesPersonInput").focus();
         },
         error: function(request, status, error) {
             console.log("Error");
