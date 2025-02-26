@@ -3,20 +3,20 @@ function displaySales(sales) {
     $.each(sales, function (i, sale) {
         let saleEntry = $(`
             <div class="container">
-                <div class="row margin-v sale-entry">
+                <div class="row margin-v sale-entry" data-id="${sale.id}">
                     <div class="col-3 error-msg">${sale.salesperson}</div>
                     <div class="col-4 error-msg">${sale.client}</div>
                     <div class="col-2 error-msg">${sale.reams}</div>
-                    <button class="col-3 delete-btn" data-id="${sale.id}">X</button>
+                    <button class="col-3 delete-btn">X</button>
                 </div>
             </div>
         `);
         $("#sales_container").append(saleEntry);
     });
 
-    // event listener to trigger sale deletion
-    $(".delete-btn").click(function () {
-        let saleId = $(this).data("id");
+    // Ensure event listeners are only attached once
+    $(".delete-btn").on('click', function () {
+        let saleId = $(this).closest(".sale-entry").data("id");
         deleteSale(saleId);
     });
 
@@ -98,23 +98,26 @@ function deleteSale(saleID) {
 $(document).ready(function(){
     //when the page loads, display all the names
     getSales();                        
-    $("#submit_sale").click(function(){                
+    
+    // ensure the click event is only bound once!
+    $("#submit_sale").off('click').on('click', function(){                
         addSales();
-    })
+    });
 
-    $("#submit_sale").keypress(function(e){     
+    // ensure the keypress event is only bound once!
+    $("#submit_sale").off('keypress').on('keypress', function(e){     
         if(e.which == 13) {
             addSales();
         }   
-    })
+    });
 
      // trash / delete area
      $("#trash").droppable({
-        accept: ".sale-row",
+        accept: ".sale-entry",
         activeClass: "bg-warning",
         drop: function (event, ui) {
-            let saleId = ui.data("id");
-            deleteSale(saleID);
+            let saleId = ui.draggable.data("id");
+            deleteSale(saleId);
         }
     });
-})
+});

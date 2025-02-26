@@ -10,6 +10,18 @@
     font-family: "Cinzel", serif;
 }
 
+.delete-btn {
+    background-color: #dc3545;
+    color: gray;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
 .sale-entry {
     padding: 10px;
     margin-bottom: 10px;
