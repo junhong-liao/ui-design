@@ -6,8 +6,7 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home Page</a>
-        <!-- Simple inline form for searching -->
+        <a href="{{ url_for('index') }}">Radiohead Song Search (RSS)</a>
         <form action="{{ url_for('search') }}" method="GET" style="display:inline; margin-left: 1rem;">
             <input type="text" name="query" placeholder="Search...">
             <button type="submit">Search...</button>

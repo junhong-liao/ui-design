@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, abort
 
 app = Flask(__name__)
-# dataset (10 songs)
+# dataset (size 10 songs)
 data = {
     "1": {
         "album": "In Rainbows",
@@ -150,26 +150,28 @@ data = {
     }
 }
 
+# popular items determined server-side
 popular_items = [data["5"], data["7"], data["9"]]
 
 @app.route("/")
 def index():
-    # Render the homepage with popular items
+    # render homepage with popular items
     return render_template("index.html", popular_items=popular_items)
 
 @app.route("/search", methods=["GET"])
 def search():
     query = request.args.get("query", "").strip()
     if query == "":
-        # If the search query is empty or only whitespace, redirect to the homepage
+        # case: query is empty or whitespace -> redirect to the homepage
         return redirect(url_for("index"))
-    # Server-side search: return songs where the title contains the query (case sensitive)
+    # search (server-side): return songs where the title contains the query
     results = []
     for item in data.values():
         if query in item["title"]:
             results.append(item)
     return render_template("results.html", query=query, results=results)
 
+# view a particular item (all data)
 @app.route("/view/<item_id>")
 def view_item(item_id):
     item = data.get(item_id)

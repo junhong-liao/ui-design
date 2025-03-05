@@ -1,10 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Welcome to the In Rainbows Song Search</h1>
 <h2>Popular Songs</h2>
 
-<!-- Map from each song title to its numeric ID -->
+<!-- use jinja to map from each song title to its numeric ID -->
 {% set title_to_id = {
     "15 Step": 1,
     "Bodysnatchers": 2,
