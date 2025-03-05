@@ -1,2 +1,2 @@
 # ui-design
-COMSW4170
+COMSW4170 assignments

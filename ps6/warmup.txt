@@ -1,0 +1,19 @@
+data = {
+    {
+        "id": "1",
+        "album": "In Rainbows",
+        "title": "All I Need",
+        "length": "3:48",
+        "producer": "Nigel Godrich",
+        "instruments": {
+            "vocals": "Thom Yorke",
+            "strings": "Jonny Greenwood",
+            "guitar": "Ed O'Brien, Jonny Greenwood",
+            "bass": "Colin Greenwood",
+            "drums": "Philip Selway",
+            "piano": "Jonny Greenwood",
+            "synthesizers": "Jonny Greenwood",
+            "percussion": "Philip Selway"
+        }
+    }
+}
