@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ item.title }}</h2>
+<p><strong>Album:</strong> {{ item.album }}</p>
+<p><strong>Length:</strong> {{ item.length }}</p>
+<p><strong>Producer:</strong> {{ item.producer }}</p>
+<p><strong>Year:</strong> {{ item.year }}</p>
+
+<h4>Genres:</h4>
+<ul>
+    {% for genre in item.genres %}
+        <li>{{ genre }}</li>
+    {% endfor %}
+</ul>
+
+<h4>Instruments:</h4>
+<ul>
+    {% for key, value in item.instruments.items() %}
+        <li><strong>{{ key.capitalize() }}:</strong> {{ value }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

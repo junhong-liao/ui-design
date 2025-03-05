@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Welcome to the In Rainbows Song Search</h1>
+<h2>Popular Songs</h2>
+
+<!-- Map from each song title to its numeric ID -->
+{% set title_to_id = {
+    "15 Step": 1,
+    "Bodysnatchers": 2,
+    "Nude": 3,
+    "Weird Fishes/Arpeggi": 4,
+    "All I Need": 5,
+    "Faust Arp": 6,
+    "Reckoner": 7,
+    "House of Cards": 8,
+    "Jigsaw Falling Into Place": 9,
+    "Videotape": 10
+} %}
+
+<ul>
+  {% for item in popular_items %}
+    <li>
+      <!-- Use the title_to_id dictionary to link to /view/<id> -->
+      <a href="{{ url_for('view_item', item_id=title_to_id[item.title]) }}">
+        {{ item.title }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

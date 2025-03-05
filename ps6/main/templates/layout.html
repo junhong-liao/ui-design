@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radiohead Song Search</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Home Page</a>
+        <!-- Simple inline form for searching -->
+        <form action="{{ url_for('search') }}" method="GET" style="display:inline; margin-left: 1rem;">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search...</button>
+        </form>
+    </nav>
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
